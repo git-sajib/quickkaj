@@ -179,6 +179,9 @@
                         <i class="fa-solid fa-arrow-left mr-2"></i>{{ app()->getLocale() === 'bn' ? 'সব চাকরি' : 'All Jobs' }}
                     </a>
                 </div>
+
+                {{-- Social Share Bar --}}
+                <x-social-share :url="url()->current()" :title="$job->getTitle() . ' — ' . $job->company" />
             </article>
         </div>
 

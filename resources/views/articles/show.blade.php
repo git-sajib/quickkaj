@@ -110,6 +110,9 @@
                         </div>
                     @endif
 
+                    {{-- Social Share Bar --}}
+                    <x-social-share :url="url()->current()" :title="$article->getTitle()" />
+
                 </div>
             </article>
 
