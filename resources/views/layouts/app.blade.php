@@ -15,6 +15,17 @@
       gtag('config', 'G-8622VZ0624');
     </script>
 
+    {{-- OneSignal Web Push SDK --}}
+    <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+    <script>
+      window.OneSignalDeferred = window.OneSignalDeferred || [];
+      OneSignalDeferred.push(async function(OneSignal) {
+        await OneSignal.init({
+          appId: "ad494923-3b51-440f-8492-d5ee702df0b6",
+        });
+      });
+    </script>
+
     {{-- Favicon --}}
     <link rel="icon" type="image/png" href="{{ asset('images/favicon.png') }}">
     <link rel="apple-touch-icon" href="{{ asset('apple-touch-icon.png') }}">
