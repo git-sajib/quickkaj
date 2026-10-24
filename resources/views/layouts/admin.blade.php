@@ -154,15 +154,19 @@
         {{-- User footer --}}
         <div class="border-t border-gray-100 px-4 py-3 bg-gray-50/50">
             <div class="flex items-center justify-between">
-                <div class="flex items-center gap-2.5 min-w-0">
+                <a href="{{ route('admin.users.edit', auth()->user()) }}" class="flex items-center gap-2.5 min-w-0 hover:opacity-80 transition-opacity" title="{{ app()->getLocale() === 'bn' ? 'প্রোফাইল ও পাসওয়ার্ড পরিবর্তন' : 'Edit profile & password' }}">
                     <div class="w-8 h-8 bg-blue-100 text-blue-700 rounded-full flex items-center justify-center font-bold text-xs shrink-0">
                         {{ strtoupper(substr(auth()->user()->name ?? 'A', 0, 1)) }}
                     </div>
                     <div class="truncate">
                         <p class="text-xs font-semibold text-gray-800 truncate">{{ auth()->user()->name }}</p>
-                        <p class="text-[10px] text-gray-400 capitalize">{{ auth()->user()->role ?? 'admin' }}</p>
+                        <p class="text-[10px] text-blue-600 capitalize flex items-center gap-1">
+                            <span>{{ auth()->user()->role ?? 'admin' }}</span>
+                            <span class="text-gray-300">•</span>
+                            <span class="hover:underline text-[10px]">{{ app()->getLocale() === 'bn' ? 'পাসওয়ার্ড পরিবর্তন' : 'Change password' }}</span>
+                        </p>
                     </div>
-                </div>
+                </a>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <button type="submit" class="w-7 h-7 rounded-lg text-gray-400 hover:text-red-600 hover:bg-red-50 flex items-center justify-center transition-colors" title="{{ __('ui.logout') }}">

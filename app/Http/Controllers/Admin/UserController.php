@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
 
 class UserController extends Controller
@@ -32,6 +33,7 @@ class UserController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:100',
             'role' => 'required|in:admin,editor,user',
+            'password' => 'nullable|string|min:8|confirmed',
         ]);
 
         // Prevent removing the last admin
@@ -42,9 +44,18 @@ class UserController extends Controller
             }
         }
 
-        $user->update($validated);
+        $updateData = [
+            'name' => $validated['name'],
+            'role' => $validated['role'],
+        ];
 
-        return redirect()->route('admin.users.index')->with('success', 'ব্যবহারকারী আপডেট হয়েছে।');
+        if (! empty($validated['password'])) {
+            $updateData['password'] = Hash::make($validated['password']);
+        }
+
+        $user->update($updateData);
+
+        return redirect()->route('admin.users.index')->with('success', 'ব্যবহারকারী সফলভাবে আপডেট হয়েছে।');
     }
 
     public function destroy(User $user): RedirectResponse
