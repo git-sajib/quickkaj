@@ -74,18 +74,15 @@
     {{-- Toast notification system (Sonner-style) --}}
     <script src="{{ asset('js/toast.js') }}"></script>
 
-    {{-- Adsterra Header Banner (728x90) — toggled from Admin > Ad Placements --}}
-    @if(!empty($headerAd))
-        <div class="text-center bg-gray-50 py-1">{!! $headerAd->html_code !!}</div>
-    @endif
-
-    {{-- Structured Data --}}
-    @yield('structured_data')
-
-    {{-- Page-specific Styles --}}
-    @stack('styles')
 </head>
 <body class="bg-neutral-50 text-gray-900 font-body antialiased">
+
+    {{-- Adsterra Header Banner (728x90) — toggled from Admin > Ad Placements --}}
+    @if(!empty($headerAd))
+        <div class="text-center bg-gray-50 py-1 border-b border-gray-100 flex items-center justify-center overflow-hidden min-h-[90px]">
+            {!! $headerAd->html_code !!}
+        </div>
+    @endif
 
     {{-- Navigation --}}
     @include('partials.navbar')
