@@ -94,6 +94,13 @@
                     <input type="checkbox" name="is_featured" value="1" class="accent-blue-600 w-4 h-4 rounded" {{ old('is_featured') ? 'checked' : '' }}>
                     <span class="text-sm font-medium"><i class="fa-solid fa-star text-amber-500 mr-1"></i>{{ app()->getLocale() === 'bn' ? 'বিশেষ' : 'Featured' }}</span>
                 </label>
+                <label class="flex items-center gap-2 cursor-pointer bg-blue-50/60 px-3 py-1.5 rounded-xl border border-blue-100">
+                    <input type="checkbox" name="send_push" value="1" class="accent-blue-600 w-4 h-4 rounded" {{ old('send_push', '1') ? 'checked' : '' }}>
+                    <span class="text-sm font-semibold text-blue-700 flex items-center gap-1.5">
+                        <i class="fa-solid fa-bell text-blue-600"></i>
+                        {{ app()->getLocale() === 'bn' ? 'পুশ নোটিফিকেশন পাঠান' : 'Send Push Notification' }}
+                    </span>
+                </label>
             </div>
         </div>
 

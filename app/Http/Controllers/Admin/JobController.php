@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreJobRequest;
 use App\Http\Requests\UpdateJobRequest;
 use App\Models\Job;
+use App\Services\OneSignalService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -75,9 +76,19 @@ class JobController extends Controller
             $data['published_at'] = now();
         }
 
-        Job::create($data);
+        $job = Job::create($data);
 
-        return redirect()->route('admin.jobs.index')->with('success', 'চাকরি সফলভাবে তৈরি হয়েছে।');
+        // OneSignal Web Push Notification
+        if (($data['is_published'] ?? false) && $request->boolean('send_push')) {
+            $pushTitle = 'নতুন চাকরির বিজ্ঞপ্তি: '.$job->title_bn;
+            $pushMsg = ($job->employer_bn ? $job->employer_bn.' — ' : '').'বিস্তারিত দেখুন ও আবেদন করুন।';
+            $jobUrl = url('/bn/jobs/'.$job->slug);
+            $imgUrl = $job->featured_image ? asset('storage/'.$job->featured_image) : null;
+
+            OneSignalService::sendPush($pushTitle, $pushMsg, $jobUrl, $imgUrl);
+        }
+
+        return redirect()->route('admin.jobs.index')->with('success', 'চাকরি সফলভাবে তৈরি হয়েছে এবং নোটিফিকেশন পাঠানো হয়েছে।');
     }
 
     public function edit(Job $job): View

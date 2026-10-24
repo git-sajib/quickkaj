@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateArticleRequest;
 use App\Models\Article;
 use App\Models\Category;
 use App\Models\Tag;
+use App\Services\OneSignalService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -100,7 +101,17 @@ class ArticleController extends Controller
         $article = Article::create($data);
         $article->tags()->sync($tagIds);
 
-        return redirect()->route('admin.articles.index')->with('success', 'নিবন্ধ সফলভাবে তৈরি হয়েছে।');
+        // OneSignal Web Push Notification
+        if (($data['is_published'] ?? false) && $request->boolean('send_push')) {
+            $pushTitle = 'জরুরি খবর: '.$article->title_bn;
+            $pushMsg = Str::limit(strip_tags($article->excerpt_bn ?? $article->body_bn ?? 'নতুন খবর প্রকাশিত হয়েছে।'), 100);
+            $articleUrl = url('/bn/news/'.$article->slug);
+            $imgUrl = $article->featured_image ? asset('storage/'.$article->featured_image) : null;
+
+            OneSignalService::sendPush($pushTitle, $pushMsg, $articleUrl, $imgUrl);
+        }
+
+        return redirect()->route('admin.articles.index')->with('success', 'নিবন্ধ সফলভাবে তৈরি হয়েছে এবং নোটিফিকেশন পাঠানো হয়েছে।');
     }
 
     public function edit(Article $article): View

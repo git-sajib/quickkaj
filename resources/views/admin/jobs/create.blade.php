@@ -142,6 +142,13 @@
                         {{ app()->getLocale() === 'bn' ? 'যাচাইকৃত' : 'Verified' }}
                     </span>
                 </label>
+                <label class="flex items-center gap-3 cursor-pointer bg-blue-50/60 px-3 py-1.5 rounded-xl border border-blue-100">
+                    <input type="checkbox" name="send_push" value="1" class="w-4 h-4 rounded accent-blue-600" {{ old('send_push', '1') ? 'checked' : '' }}>
+                    <span class="text-sm font-semibold text-blue-700 flex items-center gap-1.5">
+                        <i class="fa-solid fa-bell text-blue-600"></i>
+                        {{ app()->getLocale() === 'bn' ? 'ইউজারদের ফোনে পুশ নোটিফিকেশন পাঠান' : 'Send Push Notification to Users' }}
+                    </span>
+                </label>
             </div>
         </div>
 

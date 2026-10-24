@@ -33,6 +33,7 @@ class StoreJobRequest extends FormRequest
             'featured_image' => 'nullable|image|max:2048|mimes:jpg,jpeg,png,webp',
             'is_published' => 'boolean',
             'is_verified' => 'boolean',
+            'send_push' => 'nullable|boolean',
             'seo_title' => 'nullable|string|max:160',
             'seo_description' => 'nullable|string|max:300',
         ];
