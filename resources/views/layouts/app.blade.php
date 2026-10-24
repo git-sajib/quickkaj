@@ -5,6 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    {{-- Google Analytics (gtag.js) --}}
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8622VZ0624"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-8622VZ0624');
+    </script>
+
     {{-- Favicon --}}
     <link rel="icon" type="image/png" href="{{ asset('images/favicon.png') }}">
     <link rel="apple-touch-icon" href="{{ asset('apple-touch-icon.png') }}">
