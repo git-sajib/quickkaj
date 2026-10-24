@@ -37,7 +37,7 @@ class SitemapController extends Controller
 
         $xml = view('sitemap', compact('jobs', 'articles', 'categories', 'tools'))->render();
 
-        return response($xml, 200)->header('Content-Type', 'application/xml');
+        return response($xml, 200)->header('Content-Type', 'text/xml; charset=utf-8');
     }
 
     public function robots(): Response
