@@ -124,10 +124,5 @@
         text.textContent = 'তৈরি হচ্ছে…';
     });
 
-    @if($errors->any())
-    document.addEventListener('DOMContentLoaded', function () {
-        window.toast.error('{{ $errors->first() }}', { duration: 6000 });
-    });
-    @endif
     </script>
 </x-guest-layout>

@@ -102,16 +102,5 @@
         text.textContent = 'লগইন হচ্ছে…';
     });
 
-    @if($errors->any())
-    document.addEventListener('DOMContentLoaded', function () {
-        window.toast.error('{{ $errors->first() }}', { duration: 6000 });
-    });
-    @endif
-
-    @if(session('status'))
-    document.addEventListener('DOMContentLoaded', function () {
-        window.toast.success('{{ session('status') }}');
-    });
-    @endif
     </script>
 </x-guest-layout>
