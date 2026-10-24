@@ -1,0 +1,30 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up(): void
+    {
+        Schema::create('job_alerts', function (Blueprint $table) {
+            $table->id();
+            $table->string('email');
+            $table->string('keyword')->nullable();
+            $table->string('location')->nullable();
+            $table->string('employment_type')->nullable();
+            $table->string('unsubscribe_token', 64)->unique();
+            $table->boolean('is_active')->default(true);
+            $table->timestamp('last_sent_at')->nullable();
+            $table->timestamps();
+
+            $table->index(['is_active', 'email']);
+        });
+    }
+
+    public function down(): void
+    {
+        Schema::dropIfExists('job_alerts');
+    }
+};
