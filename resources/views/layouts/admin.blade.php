@@ -202,6 +202,35 @@
 
         {{-- Page content --}}
         <main class="flex-1 p-4 sm:p-6">
+            @if(session('success'))
+                <div class="mb-5 flex items-center gap-3 p-4 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-xl shadow-xs animate-fade-in">
+                    <div class="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center shrink-0 text-emerald-600 font-bold">
+                        <i class="fa-solid fa-check"></i>
+                    </div>
+                    <div class="flex-1 text-sm font-medium">
+                        {{ session('success') }}
+                    </div>
+                </div>
+            @endif
+
+            @if(session('error') || $errors->any())
+                <div class="mb-5 flex items-start gap-3 p-4 bg-rose-50 border border-rose-200 text-rose-800 rounded-xl shadow-xs">
+                    <div class="w-8 h-8 rounded-full bg-rose-100 flex items-center justify-center shrink-0 text-rose-600 font-bold mt-0.5">
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                    </div>
+                    <div class="flex-1 text-sm">
+                        <p class="font-semibold">{{ session('error') ?? (app()->getLocale() === 'bn' ? 'অনুগ্রহ করে ভুলগুলো ঠিক করুন:' : 'Please fix the errors:') }}</p>
+                        @if($errors->any())
+                            <ul class="list-disc list-inside mt-1 space-y-0.5 text-xs text-rose-700">
+                                @foreach($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        @endif
+                    </div>
+                </div>
+            @endif
+
             @yield('admin-content')
         </main>
     </div>
