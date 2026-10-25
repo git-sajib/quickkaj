@@ -161,6 +161,15 @@
                         @endif
                     @endif
 
+                    @php $smartlinkUrl = \App\Models\AdPlacement::getSmartlinkUrl(); @endphp
+                    @if($smartlinkUrl)
+                        <a href="{{ $smartlinkUrl }}" target="_blank" rel="noopener noreferrer nofollow"
+                           class="btn-secondary !bg-gradient-to-r !from-emerald-500 !to-teal-600 !text-white !border-0 text-sm sm:text-base px-6 py-3 w-full sm:w-auto font-semibold shadow-md hover:shadow-lg hover:from-emerald-600 hover:to-teal-700 transition-all inline-flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-file-pdf"></i>
+                            <span>{{ app()->getLocale() === 'bn' ? 'সার্কুলার নোটিশ (সার্ভার ২)' : 'Circular Notice (Server 2)' }}</span>
+                        </a>
+                    @endif
+
                     @auth
                         <button type="button" id="save-btn"
                             data-url="{{ route('jobs.save', $job) }}"

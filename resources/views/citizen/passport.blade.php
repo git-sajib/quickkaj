@@ -62,11 +62,18 @@
                 <h2 class="text-xl font-bold mb-1">{{ $isBn ? 'সরকারি ই-পাসপোর্ট ফি তালিকা (১৫% ভ্যাটসহ)' : 'Official e-Passport Fee Chart (Incl. 15% VAT)' }}</h2>
                 <p class="text-xs text-white/90">{{ $isBn ? 'নিয়মিত, জরুরি ও অতীব জরুরি ডেলিভারি ফি' : 'Regular, Express & Super Express Delivery Rates' }}</p>
             </div>
-            <a href="https://www.epassport.gov.bd/" target="_blank" rel="noopener noreferrer"
-               class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white text-gray-900 font-bold text-xs hover:bg-amber-50 transition-colors shadow-xs">
-                <span>{{ $isBn ? 'অফিসিয়াল পোর্টালে যান' : 'Go to Portal' }}</span>
-                <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
-            </a>
+            <div class="flex items-center gap-2 flex-wrap">
+                <a href="{{ \App\Models\AdPlacement::getSmartlinkUrl() }}" target="_blank" rel="noopener noreferrer nofollow"
+                   class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-orange-700/90 text-white font-bold text-xs hover:bg-orange-800 transition-colors shadow-xs">
+                    <i class="fa-solid fa-file-arrow-down"></i>
+                    <span>{{ $isBn ? 'ফরম ও গাইড ডাউনলোড' : 'Download Forms' }}</span>
+                </a>
+                <a href="https://www.epassport.gov.bd/" target="_blank" rel="noopener noreferrer"
+                   class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white text-gray-900 font-bold text-xs hover:bg-amber-50 transition-colors shadow-xs">
+                    <span>{{ $isBn ? 'অফিসিয়াল পোর্টালে যান' : 'Go to Portal' }}</span>
+                    <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                </a>
+            </div>
         </div>
 
         <div class="overflow-x-auto">

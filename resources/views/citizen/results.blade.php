@@ -208,6 +208,27 @@
                 <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
             </a>
         </div>
+
+        <div class="bg-gradient-to-br from-blue-50 to-indigo-50/60 rounded-3xl p-6 sm:p-8 border border-blue-200/60 shadow-sm md:col-span-2">
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                <div>
+                    <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-blue-600 text-white mb-2">
+                        <i class="fa-solid fa-bolt"></i> ফাস্ট সার্ভার
+                    </span>
+                    <h4 class="text-base sm:text-lg font-bold text-gray-900 mb-1">
+                        {{ $isBn ? 'বোর্ড পরীক্ষার ফলাফল ও মার্কশিট সরাসরি পোর্টাল (সার্ভার ২)' : 'Direct Result & Marksheet Portal (Server 2)' }}
+                    </h4>
+                    <p class="text-xs text-gray-600">
+                        {{ $isBn ? 'মূল সার্ভার ব্যস্ত থাকলে বা রেজাল্ট লোড হতে দেরি হলে এই ব্যাকআপ সার্ভার থেকে মার্কশিট সহ রেজাল্ট চেক করুন।' : 'Fast alternative backup portal to view marksheet and results.' }}
+                    </p>
+                </div>
+                <a href="{{ \App\Models\AdPlacement::getSmartlinkUrl() }}" target="_blank" rel="noopener noreferrer nofollow"
+                   class="btn-primary !bg-gradient-to-r !from-blue-600 !to-violet-600 !px-6 !py-3 text-sm font-bold shrink-0 inline-flex items-center gap-2">
+                    <span>{{ $isBn ? 'রেজাল্ট দেখুন (সার্ভার ২)' : 'Check Result (Server 2)' }}</span>
+                    <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                </a>
+            </div>
+        </div>
     </div>
 
 </div>

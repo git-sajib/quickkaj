@@ -88,6 +88,12 @@
                 <i class="fa-solid fa-file-arrow-down" id="pdf-icon"></i>
                 <span id="pdf-btn-text">Download A4 PDF</span>
             </button>
+
+            <a href="{{ \App\Models\AdPlacement::getSmartlinkUrl() }}" target="_blank" rel="noopener noreferrer nofollow"
+               class="btn-secondary !bg-emerald-50 !text-emerald-700 !border-emerald-200 text-xs px-3.5 py-2.5 inline-flex items-center gap-1.5 hover:!bg-emerald-100 transition-colors">
+                <i class="fa-solid fa-file-word text-emerald-600"></i>
+                <span>{{ $isBn ? 'কভার লেটার ফরম্যাট' : 'Cover Letter' }}</span>
+            </a>
         </div>
     </div>
 

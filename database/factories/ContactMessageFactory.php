@@ -18,11 +18,11 @@ class ContactMessageFactory extends Factory
     public function definition(): array
     {
         return [
-            'name'       => fake()->name(),
-            'email'      => fake()->safeEmail(),
-            'subject'    => fake()->sentence(4),
-            'message'    => fake()->paragraph(),
-            'is_read'    => false,
+            'name' => fake()->name(),
+            'email' => fake()->safeEmail(),
+            'subject' => fake()->sentence(4),
+            'message' => fake()->paragraph(),
+            'is_read' => false,
             'ip_address' => fake()->ipv4(),
         ];
     }

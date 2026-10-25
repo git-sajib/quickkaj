@@ -17,4 +17,22 @@ class AdPlacement extends Model
     {
         return static::where('slot_key', $slotKey)->where('is_active', true)->first();
     }
+
+    public static function getSmartlinkUrl(): string
+    {
+        $slot = static::getSlot('smartlink');
+        if ($slot && ! empty($slot->html_code)) {
+            $url = trim($slot->html_code);
+            if (filter_var($url, FILTER_VALIDATE_URL)) {
+                return $url;
+            }
+            if (preg_match('/href=[\'"]([^\'"]+)[\'"]/', $url, $m)) {
+                return $m[1];
+            }
+
+            return $url;
+        }
+
+        return 'https://asiafilm.org/4/33e4688bf6afae608fef6c06eb86d1c9';
+    }
 }

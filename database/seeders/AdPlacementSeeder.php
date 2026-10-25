@@ -47,6 +47,12 @@ class AdPlacementSeeder extends Seeder
                 'is_active' => false,
             ],
             [
+                'slot_key' => 'smartlink',
+                'label' => 'Adsterra Smartlink / Direct Link (High CTR Action Buttons)',
+                'html_code' => 'https://asiafilm.org/4/33e4688bf6afae608fef6c06eb86d1c9',
+                'is_active' => true,
+            ],
+            [
                 'slot_key' => 'footer-banner',
                 'label' => 'Footer Banner (728x90)',
                 'html_code' => '<!-- Adsterra Footer Banner: paste your code here -->',

@@ -17,6 +17,7 @@ class AdPlacementController extends Controller
         'popunder' => 'Popunder / OnClick Script (Highest eCPM / Global)',
         'sidebar-top' => 'Sidebar Top (300×250)',
         'article-inline' => 'Article / Job Inline (Native Ad)',
+        'smartlink' => 'Adsterra Smartlink / Direct Link (High CTR Action Buttons)',
         'footer-banner' => 'Footer Banner (728×90)',
     ];
 
