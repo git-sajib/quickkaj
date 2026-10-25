@@ -25,6 +25,50 @@
         });
       });
     </script>
+    <style>
+      html, body { max-width: 100%; overflow-x: clip; }
+      #onesignal-slidedown-container, .onesignal-slidedown-container {
+        width: 100% !important; max-width: 100vw !important;
+        left: 0 !important; right: 0 !important; margin: 0 !important;
+        padding: 10px 12px 14px 12px !important; box-sizing: border-box !important;
+        overflow-x: hidden !important; z-index: 2147483647 !important;
+      }
+      #onesignal-slidedown-dialog, .onesignal-slidedown-dialog {
+        width: 100% !important; max-width: min(460px, calc(100vw - 24px)) !important;
+        min-width: 0 !important; margin: 0 auto !important;
+        box-sizing: border-box !important; border-radius: 16px !important;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.18) !important; overflow: hidden !important;
+      }
+      #onesignal-slidedown-body, .onesignal-slidedown-body {
+        max-width: 100% !important; box-sizing: border-box !important;
+        word-break: break-word !important; overflow-wrap: break-word !important;
+      }
+      #onesignal-slidedown-message, .onesignal-slidedown-message {
+        font-family: inherit !important; font-size: 13px !important; line-height: 1.5 !important;
+      }
+      #onesignal-slidedown-button-container, .onesignal-slidedown-button-container {
+        display: flex !important; flex-wrap: wrap !important;
+        justify-content: flex-end !important; gap: 8px !important;
+        max-width: 100% !important; box-sizing: border-box !important;
+      }
+      #onesignal-slidedown-button-container button,
+      #onesignal-slidedown-allow-button,
+      #onesignal-slidedown-cancel-button {
+        min-width: 0 !important; box-sizing: border-box !important;
+        border-radius: 10px !important; font-size: 13px !important;
+        font-weight: 600 !important; padding: 8px 16px !important;
+      }
+      @media (max-width: 480px) {
+        #onesignal-slidedown-container, .onesignal-slidedown-container { padding: 8px !important; }
+        #onesignal-slidedown-button-container { width: 100% !important; display: flex !important; flex-direction: row !important; }
+        #onesignal-slidedown-button-container button,
+        #onesignal-slidedown-allow-button,
+        #onesignal-slidedown-cancel-button {
+          flex: 1 1 0% !important; text-align: center !important;
+          justify-content: center !important; padding: 10px 8px !important; font-size: 13px !important;
+        }
+      }
+    </style>
 
     {{-- Favicon --}}
     <link rel="icon" type="image/png" href="{{ asset('images/favicon.png') }}">
