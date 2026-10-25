@@ -16,7 +16,7 @@ return [
 
     // Site
     'site_name' => 'Quickkaj',
-    'site_tagline' => 'Your Trusted Information Hub',
+    'site_tagline' => 'Your Trusted Information & Digital Tools Hub',
     'read_more' => 'Read More',
     'view_all' => 'View All',
     'search' => 'Search',

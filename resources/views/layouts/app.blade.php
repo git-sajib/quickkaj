@@ -51,14 +51,24 @@
         <link rel="alternate" hreflang="x-default" href="{{ $bnCanonicalUrl }}">
     @endunless
 
-    {{-- Open Graph --}}
-    <meta property="og:title" content="@yield('og_title', __('ui.site_name'))">
+    {{-- Open Graph / Facebook --}}
+    <meta property="og:site_name" content="{{ __('ui.site_name') }}">
+    <meta property="og:title" content="@yield('og_title', __('ui.site_name') . ' — ' . __('ui.site_tagline'))">
     <meta property="og:description" content="@yield('og_description', __('ui.site_tagline'))">
     <meta property="og:image" content="@yield('og_image', asset('images/og-default.jpg'))">
+    <meta property="og:image:alt" content="@yield('og_image_alt', __('ui.site_name') . ' — ' . __('ui.site_tagline'))">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta property="og:url" content="{{ url()->current() }}">
     <meta property="og:type" content="@yield('og_type', 'website')">
     <meta property="og:locale" content="{{ app()->getLocale() === 'bn' ? 'bn_BD' : 'en_US' }}">
+    @if(config('services.facebook.app_id'))
+        <meta property="fb:app_id" content="{{ config('services.facebook.app_id') }}">
+    @endif
     <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="@yield('og_title', __('ui.site_name') . ' — ' . __('ui.site_tagline'))">
+    <meta name="twitter:description" content="@yield('og_description', __('ui.site_tagline'))">
+    <meta name="twitter:image" content="@yield('og_image', asset('images/og-default.jpg'))">
 
     {{-- Google Fonts: Noto Sans Bengali for Bengali, Inter for English --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
