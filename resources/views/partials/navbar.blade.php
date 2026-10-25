@@ -18,7 +18,7 @@
     }
 @endphp
 
-<nav class="bg-white/95 backdrop-blur-sm shadow-sm border-b border-gray-100 sticky top-0 z-40">
+<nav class="bg-white/95 backdrop-blur-sm shadow-sm border-b border-gray-100 sticky top-0 z-[9999999]">
     <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-16 gap-2">
 
@@ -408,7 +408,7 @@
 
     {{-- Mobile Floating Overlay Drawer --}}
     <div id="mobile-menu"
-         class="md:hidden hidden absolute top-full left-0 right-0 w-full bg-white/95 backdrop-blur-md shadow-2xl border-b border-gray-100 z-50 transition-all duration-200">
+         class="md:hidden hidden absolute top-full left-0 right-0 w-full bg-white/95 backdrop-blur-md shadow-2xl border-b border-gray-100 z-[10000000] transition-all duration-200">
         <div class="max-w-7xl mx-auto px-4 py-3 flex flex-col gap-1">
             <a href="{{ route('home', ['locale' => $locale]) }}" class="mobile-nav-link flex items-center gap-2.5 {{ request()->routeIs('home') ? 'bg-blue-50 text-blue-600 font-semibold' : '' }}">
                 <i class="fa-solid fa-house w-4 text-center text-blue-600"></i>
@@ -517,7 +517,7 @@
 </nav>
 
 {{-- Mobile Overlay Backdrop --}}
-<div id="mobile-menu-backdrop" class="fixed inset-0 top-16 bg-black/30 backdrop-blur-[2px] z-30 hidden md:hidden"></div>
+<div id="mobile-menu-backdrop" class="fixed inset-0 top-16 bg-black/30 backdrop-blur-[2px] z-[9999998] hidden md:hidden"></div>
 
 <script>
 (() => {
