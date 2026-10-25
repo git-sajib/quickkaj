@@ -3,6 +3,7 @@
     $isBn      = $locale === 'bn';
     $altLocale = $locale === 'bn' ? 'en' : 'bn';
     $altLabel  = $locale === 'bn' ? 'English' : 'বাংলা';
+    $altShortLabel = $locale === 'bn' ? 'EN' : 'বাং';
 
     // Build alternate-locale URL — replace leading locale prefix, or preserve path under alt locale
     $currentPath = request()->path();
@@ -18,13 +19,13 @@
 @endphp
 
 <nav class="bg-white/95 backdrop-blur-sm shadow-sm border-b border-gray-100 sticky top-0 z-40">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex items-center justify-between h-16">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16 gap-2">
 
             {{-- Logo --}}
-            <a href="{{ route('home', ['locale' => $locale]) }}" class="flex items-center gap-2.5 group">
-                <img src="{{ asset('images/logo-icon.png') }}" alt="{{ __('ui.site_name') }}" class="w-9 h-9 rounded-xl shadow-md group-hover:scale-105 transition-transform duration-200 object-contain">
-                <span class="text-xl font-extrabold bg-gradient-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent">
+            <a href="{{ route('home', ['locale' => $locale]) }}" class="flex items-center gap-2 group shrink-0">
+                <img src="{{ asset('images/logo-icon.png') }}" alt="{{ __('ui.site_name') }}" class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl shadow-md group-hover:scale-105 transition-transform duration-200 object-contain shrink-0">
+                <span class="text-lg sm:text-xl font-extrabold bg-gradient-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent whitespace-nowrap">
                     {{ __('ui.site_name') }}
                 </span>
             </a>
@@ -364,40 +365,42 @@
             </div>
 
             {{-- Right: language switcher + auth --}}
-            <div class="flex items-center gap-3">
+            <div class="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
 
                 {{-- Language Toggle --}}
                 <a href="{{ $altUrl }}"
-                   class="text-xs font-semibold px-3 py-1.5 rounded-full bg-gray-100 hover:bg-blue-50 text-gray-600 hover:text-blue-600 transition-colors border border-gray-200 whitespace-nowrap inline-flex items-center gap-1.5">
-                    <i class="fa-solid fa-globe text-blue-600"></i>
-                    <span>{{ $altLabel }}</span>
+                   class="text-xs font-semibold px-2 sm:px-3 py-1 sm:py-1.5 rounded-full bg-gray-100 hover:bg-blue-50 text-gray-700 hover:text-blue-600 transition-colors border border-gray-200 whitespace-nowrap inline-flex items-center gap-1 sm:gap-1.5 shrink-0"
+                   title="{{ $altLabel }}">
+                    <i class="fa-solid fa-globe text-blue-600 text-[11px] sm:text-xs"></i>
+                    <span class="hidden sm:inline">{{ $altLabel }}</span>
+                    <span class="sm:hidden font-bold text-[11px] tracking-wide">{{ $altShortLabel }}</span>
                 </a>
 
                 @auth
                     @if(auth()->user()->isAdmin())
                         <a href="{{ route('admin.dashboard') }}"
-                           class="text-xs font-semibold px-3 py-1.5 rounded-full bg-violet-50 hover:bg-violet-100 text-violet-700 transition-colors border border-violet-200 inline-flex items-center gap-1.5">
-                            <i class="fa-solid fa-gear text-violet-600"></i>
-                            <span>{{ __('ui.admin') }}</span>
+                           class="text-xs font-semibold px-2 sm:px-3 py-1 sm:py-1.5 rounded-full bg-violet-50 hover:bg-violet-100 text-violet-700 transition-colors border border-violet-200 inline-flex items-center gap-1 sm:gap-1.5 shrink-0">
+                            <i class="fa-solid fa-gear text-violet-600 text-[11px] sm:text-xs"></i>
+                            <span class="hidden sm:inline">{{ __('ui.admin') }}</span>
                         </a>
                     @endif
-                    <form method="POST" action="{{ route('logout') }}">
+                    <form method="POST" action="{{ route('logout') }}" class="shrink-0">
                         @csrf
-                        <button type="submit" class="text-xs text-gray-500 hover:text-red-500 transition-colors">
+                        <button type="submit" class="text-xs text-gray-500 hover:text-red-500 transition-colors px-1">
                             {{ __('ui.logout') }}
                         </button>
                     </form>
                 @else
-                    <a href="{{ route('login') }}" class="btn-primary text-sm">{{ __('ui.login') }}</a>
+                    <a href="{{ route('login') }}" class="btn-primary !px-2.5 sm:!px-4 !py-1 sm:!py-2 !text-xs sm:!text-sm rounded-lg sm:rounded-xl shrink-0">{{ __('ui.login') }}</a>
                 @endauth
 
                 {{-- Mobile hamburger button --}}
                 <button id="mobile-menu-btn"
                         type="button"
-                        class="md:hidden w-9 h-9 rounded-lg hover:bg-gray-100 flex items-center justify-center transition-colors text-gray-700 focus:outline-none"
+                        class="md:hidden w-8 h-8 sm:w-9 sm:h-9 rounded-lg hover:bg-gray-100 flex items-center justify-center transition-colors text-gray-700 focus:outline-none shrink-0"
                         aria-label="Toggle menu"
                         aria-expanded="false">
-                    <i id="mobile-menu-icon" class="fa-solid fa-bars text-lg"></i>
+                    <i id="mobile-menu-icon" class="fa-solid fa-bars text-base sm:text-lg"></i>
                 </button>
             </div>
         </div>
