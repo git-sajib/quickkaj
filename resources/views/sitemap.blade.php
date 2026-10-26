@@ -145,12 +145,16 @@
         <priority>0.5</priority>
     </url>
     <url>
-        <loc>{{ url('/privacy-policy') }}</loc>
+        <loc>{{ url('/bn/privacy-policy') }}</loc>
+        <xhtml:link rel="alternate" hreflang="bn" href="{{ url('/bn/privacy-policy') }}"/>
+        <xhtml:link rel="alternate" hreflang="en" href="{{ url('/en/privacy-policy') }}"/>
         <changefreq>yearly</changefreq>
         <priority>0.3</priority>
     </url>
     <url>
-        <loc>{{ url('/terms-of-use') }}</loc>
+        <loc>{{ url('/bn/terms-of-use') }}</loc>
+        <xhtml:link rel="alternate" hreflang="bn" href="{{ url('/bn/terms-of-use') }}"/>
+        <xhtml:link rel="alternate" hreflang="en" href="{{ url('/en/terms-of-use') }}"/>
         <changefreq>yearly</changefreq>
         <priority>0.3</priority>
     </url>
