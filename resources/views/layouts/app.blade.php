@@ -6,8 +6,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="monetag" content="e33fd5596e57df01378079143b273d44">
 
-    {{-- Monetag MultiTag --}}
-    <script src="https://quge5.com/88/tag.min.js" data-zone="302321" async data-cfasync="false"></script>
+    {{-- Monetag Push Notifications (Clean & Non-Intrusive) --}}
+    <script src="https://5gvci.com/act/files/tag.min.js?z=12128922" data-cfasync="false" async></script>
 
     {{-- Google Analytics (gtag.js) --}}
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-8622VZ0624"></script>
