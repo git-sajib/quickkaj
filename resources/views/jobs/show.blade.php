@@ -138,6 +138,91 @@
                     </div>
                 @endif
 
+                {{-- Official Circular & PDF Notice Section --}}
+                @if($job->hasCircularPdf() || $job->hasFeaturedImage())
+                    <div class="mb-8 p-5 bg-gradient-to-br from-slate-50 to-blue-50/40 rounded-2xl border border-blue-100 shadow-sm">
+                        <div class="flex items-center justify-between flex-wrap gap-3 mb-4">
+                            <h2 class="font-bold text-gray-900 text-lg flex items-center gap-2">
+                                <i class="fa-solid fa-file-shield text-blue-600"></i>
+                                <span>{{ app()->getLocale() === 'bn' ? 'অফিসিয়াল সার্কুলার ও নোটিশ' : 'Official Circular Notice' }}</span>
+                            </h2>
+                            <span class="text-xs bg-emerald-100 text-emerald-800 font-semibold px-2.5 py-1 rounded-full flex items-center gap-1">
+                                <i class="fa-solid fa-circle-check text-emerald-600"></i>
+                                {{ app()->getLocale() === 'bn' ? 'যাচাইকৃত ডকুমেন্ট' : 'Verified Document' }}
+                            </span>
+                        </div>
+
+                        {{-- If PDF is available --}}
+                        @if($job->hasCircularPdf())
+                            <div class="bg-white rounded-xl border border-gray-200 p-4 shadow-sm mb-4">
+                                <div class="flex items-center justify-between flex-wrap gap-3 mb-3">
+                                    <div class="flex items-center gap-2.5">
+                                        <div class="w-10 h-10 rounded-xl bg-red-100 text-red-600 flex items-center justify-center font-bold">
+                                            <i class="fa-solid fa-file-pdf text-xl"></i>
+                                        </div>
+                                        <div>
+                                            <h3 class="text-sm font-bold text-gray-800">{{ app()->getLocale() === 'bn' ? 'সম্পূর্ণ সার্কুলার ফাইল (PDF)' : 'Full Circular File (PDF)' }}</h3>
+                                            <p class="text-xs text-gray-500">{{ app()->getLocale() === 'bn' ? 'নিচে সরাসরি পড়ুন অথবা সংরক্ষণ করুন' : 'Read below or download directly' }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <a href="{{ $job->getCircularPdfUrl() }}" download
+                                           class="btn-primary !bg-red-600 hover:!bg-red-700 text-xs sm:text-sm px-4 py-2 inline-flex items-center gap-1.5 shadow-sm">
+                                            <i class="fa-solid fa-download"></i>
+                                            <span>{{ app()->getLocale() === 'bn' ? 'PDF ডাউনলোড' : 'Download PDF' }}</span>
+                                        </a>
+                                        <a href="{{ $job->getCircularPdfUrl() }}" target="_blank" rel="noopener noreferrer"
+                                           class="btn-secondary text-xs sm:text-sm px-3.5 py-2 inline-flex items-center gap-1.5">
+                                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                            <span class="hidden sm:inline">{{ app()->getLocale() === 'bn' ? 'ফুল স্ক্রিন' : 'Fullscreen' }}</span>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                {{-- Embedded PDF Viewer --}}
+                                <div class="relative w-full rounded-xl overflow-hidden border border-gray-200 bg-gray-900 shadow-inner">
+                                    <iframe src="{{ $job->getCircularPdfUrl() }}#view=FitH"
+                                            class="w-full h-[500px] sm:h-[650px] border-0"
+                                            loading="lazy"
+                                            title="{{ $job->getTitle() }} Circular PDF">
+                                    </iframe>
+                                </div>
+                                <p class="text-[11px] text-gray-400 text-center mt-2 flex items-center justify-center gap-1">
+                                    <i class="fa-solid fa-circle-info text-blue-500"></i>
+                                    {{ app()->getLocale() === 'bn' ? 'মোবাইলে সরাসরি পড়তে সমস্যা হলে "PDF ডাউনলোড" বাটনে চাপুন।' : 'If PDF does not preview on mobile, tap "Download PDF".' }}
+                                </p>
+                            </div>
+                        @endif
+
+                        {{-- If Circular Image is available --}}
+                        @if($job->hasFeaturedImage())
+                            <div class="bg-white rounded-xl border border-gray-200 p-4 shadow-sm">
+                                <div class="flex items-center justify-between mb-3">
+                                    <h3 class="text-sm font-bold text-gray-800 flex items-center gap-1.5">
+                                        <i class="fa-regular fa-image text-blue-600"></i>
+                                        <span>{{ app()->getLocale() === 'bn' ? 'সার্কুলার ছবি / পত্রিকা বিজ্ঞপ্তি' : 'Circular Notice Image' }}</span>
+                                    </h3>
+                                    <a href="{{ $job->getFeaturedImageUrl() }}" target="_blank" rel="noopener noreferrer"
+                                       class="text-xs text-blue-600 hover:underline font-semibold flex items-center gap-1">
+                                        <i class="fa-solid fa-magnifying-glass-plus"></i>
+                                        <span>{{ app()->getLocale() === 'bn' ? 'আসল ছবি দেখুন' : 'View Full Image' }}</span>
+                                    </a>
+                                </div>
+                                <div class="rounded-xl overflow-hidden border border-gray-100 bg-gray-50 flex items-center justify-center p-2">
+                                    <a href="{{ $job->getFeaturedImageUrl() }}" target="_blank" rel="noopener noreferrer" class="block group relative cursor-zoom-in">
+                                        <img src="{{ $job->getFeaturedImageUrl() }}" alt="{{ $job->getTitle() }}"
+                                             class="w-full max-h-[750px] object-contain rounded-lg transition-transform group-hover:scale-[1.01]" loading="lazy">
+                                        <div class="absolute bottom-3 right-3 bg-gray-900/80 text-white text-xs px-3 py-1.5 rounded-lg flex items-center gap-1.5 backdrop-blur-sm shadow">
+                                            <i class="fa-solid fa-expand"></i>
+                                            <span>{{ app()->getLocale() === 'bn' ? 'বড় করে দেখতে ক্লিক করুন' : 'Click to zoom' }}</span>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        @endif
+                    </div>
+                @endif
+
                 {{-- Inline Ad BELOW description (high CTR) --}}
                 @if(!empty($inlineAd))
                     <div class="my-6 p-3 bg-gray-50 rounded-xl text-center border border-gray-100">
@@ -161,11 +246,19 @@
                         @endif
                     @endif
 
+                    @if($job->hasCircularPdf())
+                        <a href="{{ $job->getCircularPdfUrl() }}" download target="_blank"
+                           class="btn-primary !bg-red-600 hover:!bg-red-700 text-sm sm:text-base px-6 py-3 w-full sm:w-auto font-semibold shadow-md inline-flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-file-pdf"></i>
+                            <span>{{ app()->getLocale() === 'bn' ? 'অফিসিয়াল PDF (সার্ভার ১)' : 'Official PDF (Server 1)' }}</span>
+                        </a>
+                    @endif
+
                     @php $smartlinkUrl = \App\Models\AdPlacement::getSmartlinkUrl(); @endphp
                     @if($smartlinkUrl)
                         <a href="{{ $smartlinkUrl }}" target="_blank" rel="noopener noreferrer nofollow"
                            class="btn-secondary !bg-gradient-to-r !from-emerald-500 !to-teal-600 !text-white !border-0 text-sm sm:text-base px-6 py-3 w-full sm:w-auto font-semibold shadow-md hover:shadow-lg hover:from-emerald-600 hover:to-teal-700 transition-all inline-flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-file-pdf"></i>
+                            <i class="fa-solid fa-file-shield"></i>
                             <span>{{ app()->getLocale() === 'bn' ? 'সার্কুলার নোটিশ (সার্ভার ২)' : 'Circular Notice (Server 2)' }}</span>
                         </a>
                     @endif

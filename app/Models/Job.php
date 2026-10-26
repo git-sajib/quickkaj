@@ -33,6 +33,7 @@ class Job extends Model
         'education_level',
         'category_id',
         'featured_image',
+        'circular_pdf',
         'is_published',
         'is_verified',
         'is_outdated',
@@ -164,5 +165,25 @@ class Job extends Model
     public function isExpired(): bool
     {
         return $this->deadline && $this->deadline->isPast();
+    }
+
+    public function hasCircularPdf(): bool
+    {
+        return ! empty($this->circular_pdf);
+    }
+
+    public function getCircularPdfUrl(): ?string
+    {
+        return $this->circular_pdf ? asset('storage/'.$this->circular_pdf) : null;
+    }
+
+    public function hasFeaturedImage(): bool
+    {
+        return ! empty($this->featured_image);
+    }
+
+    public function getFeaturedImageUrl(): ?string
+    {
+        return $this->featured_image ? asset('storage/'.$this->featured_image) : null;
     }
 }

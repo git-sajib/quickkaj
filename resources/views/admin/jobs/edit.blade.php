@@ -96,11 +96,31 @@
                     <input type="url" name="application_url" class="form-input" value="{{ old('application_url', $job->application_url) }}">
                 </div>
                 <div class="form-group">
-                    <label class="form-label">{{ app()->getLocale() === 'bn' ? 'ছবি' : 'New Image' }}</label>
+                    <label class="form-label">{{ app()->getLocale() === 'bn' ? 'সার্কুলার ছবি / ব্যানার' : 'Featured Image / Banner' }}</label>
                     @if($job->featured_image)
                         <img src="{{ Storage::url($job->featured_image) }}" class="w-20 h-14 object-cover rounded-lg mb-2">
                     @endif
                     <input type="file" name="featured_image" class="form-input" accept="image/*">
+                </div>
+                <div class="form-group">
+                    <label class="form-label font-semibold text-blue-700 flex items-center gap-1.5">
+                        <i class="fa-solid fa-file-pdf text-red-500"></i>
+                        {{ app()->getLocale() === 'bn' ? 'অফিসিয়াল সার্কুলার ফাইল (PDF)' : 'Official Circular Notice (PDF)' }}
+                    </label>
+                    @if($job->circular_pdf)
+                        <div class="mb-2 p-2.5 bg-red-50 border border-red-200 rounded-lg flex items-center justify-between">
+                            <a href="{{ Storage::url($job->circular_pdf) }}" target="_blank" class="text-xs text-red-700 hover:underline font-semibold flex items-center gap-1.5">
+                                <i class="fa-solid fa-file-pdf"></i>
+                                <span>{{ basename($job->circular_pdf) }}</span>
+                            </a>
+                            <label class="flex items-center gap-1 text-xs text-red-600 cursor-pointer">
+                                <input type="checkbox" name="remove_circular_pdf" value="1" class="rounded accent-red-600">
+                                <span>{{ app()->getLocale() === 'bn' ? 'রিমুভ করুন' : 'Remove' }}</span>
+                            </label>
+                        </div>
+                    @endif
+                    <input type="file" name="circular_pdf" class="form-input" accept=".pdf">
+                    <p class="text-xs text-gray-400 mt-1">{{ app()->getLocale() === 'bn' ? 'নতুন ফাইল সিলেক্ট করলে আগের ফাইল বদলে যাবে (সর্বোচ্চ ১০MB)' : 'Selecting a new file replaces current (Max 10MB)' }}</p>
                 </div>
             </div>
             <div class="form-group">

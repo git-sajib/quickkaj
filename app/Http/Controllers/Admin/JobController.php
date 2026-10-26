@@ -9,6 +9,7 @@ use App\Models\Job;
 use App\Services\OneSignalService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
 
@@ -72,6 +73,11 @@ class JobController extends Controller
                 ->store('jobs', 'public');
         }
 
+        if ($request->hasFile('circular_pdf')) {
+            $data['circular_pdf'] = $request->file('circular_pdf')
+                ->store('jobs/circulars', 'public');
+        }
+
         if ($data['is_published'] ?? false) {
             $data['published_at'] = now();
         }
@@ -101,8 +107,24 @@ class JobController extends Controller
         $data = $request->validated();
 
         if ($request->hasFile('featured_image')) {
+            if ($job->featured_image) {
+                Storage::disk('public')->delete($job->featured_image);
+            }
             $data['featured_image'] = $request->file('featured_image')
                 ->store('jobs', 'public');
+        }
+
+        if ($request->hasFile('circular_pdf')) {
+            if ($job->circular_pdf) {
+                Storage::disk('public')->delete($job->circular_pdf);
+            }
+            $data['circular_pdf'] = $request->file('circular_pdf')
+                ->store('jobs/circulars', 'public');
+        } elseif ($request->boolean('remove_circular_pdf')) {
+            if ($job->circular_pdf) {
+                Storage::disk('public')->delete($job->circular_pdf);
+            }
+            $data['circular_pdf'] = null;
         }
 
         if (($data['is_published'] ?? false) && ! $job->published_at) {
@@ -118,6 +140,13 @@ class JobController extends Controller
 
     public function destroy(Job $job): RedirectResponse
     {
+        if ($job->circular_pdf) {
+            Storage::disk('public')->delete($job->circular_pdf);
+        }
+        if ($job->featured_image) {
+            Storage::disk('public')->delete($job->featured_image);
+        }
+
         $job->delete();
 
         return redirect()->route('admin.jobs.index')->with('success', 'চাকরি মুছে ফেলা হয়েছে।');

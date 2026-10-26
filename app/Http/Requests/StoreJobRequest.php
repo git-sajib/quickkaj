@@ -31,6 +31,7 @@ class StoreJobRequest extends FormRequest
             'education_level' => 'nullable|in:any,ssc,hsc,graduate,postgraduate',
             'category_id' => 'nullable|integer|exists:categories,id',
             'featured_image' => 'nullable|image|max:2048|mimes:jpg,jpeg,png,webp',
+            'circular_pdf' => 'nullable|file|mimes:pdf|max:10240',
             'is_published' => 'boolean',
             'is_verified' => 'boolean',
             'send_push' => 'nullable|boolean',

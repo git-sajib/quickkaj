@@ -113,8 +113,17 @@
                     <input type="url" name="application_url" class="form-input" value="{{ old('application_url') }}" placeholder="https://...">
                 </div>
                 <div class="form-group">
-                    <label class="form-label">{{ app()->getLocale() === 'bn' ? 'ছবি' : 'Featured Image' }}</label>
+                    <label class="form-label">{{ app()->getLocale() === 'bn' ? 'সার্কুলার ছবি / ব্যানার' : 'Featured Image / Banner' }}</label>
                     <input type="file" name="featured_image" class="form-input" accept="image/*">
+                    <p class="text-xs text-gray-400 mt-1">{{ app()->getLocale() === 'bn' ? 'JPG, PNG বা WebP ছবি' : 'JPG, PNG or WebP image' }}</p>
+                </div>
+                <div class="form-group">
+                    <label class="form-label font-semibold text-blue-700 flex items-center gap-1.5">
+                        <i class="fa-solid fa-file-pdf text-red-500"></i>
+                        {{ app()->getLocale() === 'bn' ? 'অফিসিয়াল সার্কুলার ফাইল (PDF)' : 'Official Circular Notice (PDF)' }}
+                    </label>
+                    <input type="file" name="circular_pdf" class="form-input" accept=".pdf">
+                    <p class="text-xs text-gray-400 mt-1">{{ app()->getLocale() === 'bn' ? 'শুধুমাত্র PDF ফাইল (সর্বোচ্চ ১০MB)' : 'PDF format only (Max 10MB)' }}</p>
                 </div>
             </div>
 
