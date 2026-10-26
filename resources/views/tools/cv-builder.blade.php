@@ -79,9 +79,9 @@
                 </select>
             </div>
 
-            <button onclick="printCV()" class="btn-secondary text-xs px-3.5 py-2.5 inline-flex items-center gap-1.5">
+            <button onclick="printCV()" class="btn-primary text-xs px-4 py-2.5 inline-flex items-center gap-2 shadow-sm font-bold">
                 <i class="fa-solid fa-print"></i>
-                <span>Print</span>
+                <span>{{ $isBn ? 'প্রিন্ট / PDF ডাউনলোড' : 'Print / Save PDF' }}</span>
             </button>
 
             <a href="{{ \App\Models\AdPlacement::getSmartlinkUrl() }}" target="_blank" rel="noopener noreferrer nofollow"
@@ -365,6 +365,35 @@
                             <i class="fa-solid fa-pen-nib mr-1 text-blue-600"></i>
                             <strong>Handwritten Signature:</strong> A blank space with a clean line above <em>Signature</em> is placed on the CV for physical pen signing after print.
                         </div>
+                    </div>
+                </div>
+            </div>
+
+            {{-- 8. Complete & Download Action Card (Crucial for Mobile & Form Completion UX) --}}
+            <div class="card p-5 bg-gradient-to-br from-blue-50/90 via-indigo-50/60 to-white border-2 border-blue-200/90 shadow-md rounded-2xl">
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="w-7 h-7 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-check text-sm"></i>
+                            </span>
+                            <h4 class="font-bold text-gray-900 text-sm sm:text-base">
+                                {{ $isBn ? 'সব তথ্য পূরণ শেষ? এখনই সিভি পান' : 'Done filling in? Get your CV now' }}
+                            </h4>
+                        </div>
+                        <p class="text-xs text-gray-600 mt-1 pl-9">
+                            {{ $isBn ? '১ পেজের স্ট্যান্ডার্ড A4 সাইজে সরাসরি প্রিন্ট বা PDF ডাউনলোড করুন।' : 'Print or save directly as a standard single-page A4 PDF.' }}
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-2.5 w-full sm:w-auto pt-1 sm:pt-0">
+                        <button type="button" onclick="scrollToPreview()" class="lg:hidden flex-1 sm:flex-none btn-secondary text-xs px-3.5 py-2.5 inline-flex items-center justify-center gap-1.5 font-bold">
+                            <i class="fa-solid fa-eye text-blue-600"></i>
+                            <span>{{ $isBn ? 'প্রিভিউ দেখুন' : 'View Preview' }}</span>
+                        </button>
+                        <button type="button" onclick="printCV()" class="flex-1 sm:flex-none btn-primary text-xs sm:text-sm px-5 py-2.5 inline-flex items-center justify-center gap-2 shadow-lg shadow-blue-500/25 font-bold">
+                            <i class="fa-solid fa-print"></i>
+                            <span>{{ $isBn ? 'প্রিন্ট / PDF ডাউনলোড' : 'Print / Save PDF' }}</span>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -1217,6 +1246,13 @@ async function downloadPDF(){
         btn.disabled = false;
         btnText.textContent = origText;
         icon.className = 'fa-solid fa-file-arrow-down';
+    }
+}
+
+function scrollToPreview() {
+    const el = document.getElementById('cv-sheet-container');
+    if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 }
 
