@@ -132,6 +132,7 @@
     {{-- Toast notification system (Sonner-style) --}}
     <script src="{{ asset('js/toast.js') }}"></script>
 
+    @stack('styles')
 </head>
 <body class="bg-neutral-50 text-gray-900 font-body antialiased">
 

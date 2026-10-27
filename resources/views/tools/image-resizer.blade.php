@@ -46,53 +46,93 @@
 @endsection
 
 @push('styles')
-{{-- Local Cropper.js CSS --}}
+{{-- Cropper.js CSS (CDN + Local Fallback) --}}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.min.css" integrity="sha512-UtLOu9C7NuthZmxr20QVstfc3jjLtu6SE54iLJwyNWitYT3A8s+63ZywgkTamjsr1FXNxBRChx8annboKI01DA==" crossorigin="anonymous" referrerpolicy="no-referrer">
 <link rel="stylesheet" href="{{ asset('css/cropper.min.css') }}">
 <style>
-    /* Essential Cropper CSS Inlined to guarantee zero dependency failures */
-    .cropper-container { position: relative; font-size: 0; line-height: 0; direction: ltr; user-select: none; touch-action: none; -webkit-user-select: none; }
-    .cropper-container img { display: block; min-width: 0 !important; min-height: 0 !important; max-width: none !important; max-height: none !important; width: 100%; height: 100%; image-orientation: 0deg; }
+    /* Full Inlined Cropper CSS to guarantee 100% zero display/double-image bugs */
+    .cropper-container { position: relative; font-size: 0; line-height: 0; direction: ltr; user-select: none; touch-action: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; }
+    .cropper-container img { display: block; min-width: 0 !important; min-height: 0 !important; max-width: none !important; max-height: none !important; width: 100%; height: 100%; image-orientation: 0deg; backface-visibility: hidden; }
     .cropper-wrap-box, .cropper-canvas, .cropper-drag-box, .cropper-crop-box, .cropper-modal { position: absolute; top: 0; right: 0; bottom: 0; left: 0; }
     .cropper-wrap-box, .cropper-canvas { overflow: hidden; }
     .cropper-drag-box { opacity: 0; background-color: #fff; }
-    .cropper-modal { opacity: 0.6; background-color: #0f172a; }
+    .cropper-modal { opacity: 0.65; background-color: #0b1120; }
     .cropper-view-box { display: block; overflow: hidden; width: 100%; height: 100%; outline: 2px solid #2563eb; outline-color: rgba(37, 99, 235, 0.95); user-select: none; }
     .cropper-dashed { position: absolute; display: block; opacity: 0.75; border: 0 dashed #ffffff; }
     .cropper-dashed.dashed-h { top: 33.33333%; left: 0; width: 100%; height: 33.33333%; border-top-width: 1px; border-bottom-width: 1px; }
     .cropper-dashed.dashed-v { top: 0; left: 33.33333%; width: 33.33333%; height: 100%; border-right-width: 1px; border-left-width: 1px; }
-    .cropper-center { position: absolute; top: 50%; left: 50%; display: block; width: 0; height: 0; opacity: 0.75; }
+    .cropper-center { position: absolute; top: 50%; left: 50%; display: block; width: 0; height: 0; opacity: 0.85; }
     .cropper-center:before, .cropper-center:after { position: absolute; display: block; content: " "; background-color: #ffffff; }
     .cropper-center:before { top: 0; left: -4px; width: 9px; height: 1px; }
     .cropper-center:after { top: -4px; left: 0; width: 1px; height: 9px; }
     .cropper-face, .cropper-line, .cropper-point { position: absolute; display: block; width: 100%; height: 100%; opacity: 0.1; }
     .cropper-face { top: 0; left: 0; background-color: #fff; cursor: move; }
     .cropper-line { background-color: #2563eb; }
-    .cropper-line.line-e { top: 0; right: -3px; width: 5px; cursor: ew-resize; }
-    .cropper-line.line-n { top: -3px; left: 0; height: 5px; cursor: ns-resize; }
-    .cropper-line.line-w { top: 0; left: -3px; width: 5px; cursor: ew-resize; }
-    .cropper-line.line-s { bottom: -3px; left: 0; height: 5px; cursor: ns-resize; }
+    .cropper-line.line-e { top: 0; right: -5px; width: 10px; cursor: ew-resize; }
+    .cropper-line.line-n { top: -5px; left: 0; height: 10px; cursor: ns-resize; }
+    .cropper-line.line-w { top: 0; left: -5px; width: 10px; cursor: ew-resize; }
+    .cropper-line.line-s { bottom: -5px; left: 0; height: 10px; cursor: ns-resize; }
     .cropper-point {
-        width: 11px !important;
-        height: 11px !important;
+        width: 13px !important;
+        height: 13px !important;
         opacity: 1 !important;
         background-color: #2563eb !important;
         border: 2px solid #ffffff !important;
-        border-radius: 2px !important;
-        box-shadow: 0 1px 4px rgba(0,0,0,0.4) !important;
+        border-radius: 3px !important;
+        box-shadow: 0 1px 5px rgba(0,0,0,0.45) !important;
     }
-    .cropper-point.point-e { top: 50%; right: -5px; margin-top: -5px; cursor: ew-resize; }
-    .cropper-point.point-n { top: -5px; left: 50%; margin-left: -5px; cursor: ns-resize; }
-    .cropper-point.point-w { top: 50%; left: -5px; margin-top: -5px; cursor: ew-resize; }
-    .cropper-point.point-s { bottom: -5px; left: 50%; margin-left: -5px; cursor: ns-resize; }
-    .cropper-point.point-ne { top: -5px; right: -5px; cursor: nesw-resize; }
-    .cropper-point.point-nw { top: -5px; left: -5px; cursor: nwse-resize; }
-    .cropper-point.point-sw { bottom: -5px; left: -5px; cursor: nesw-resize; }
-    .cropper-point.point-se { right: -6px; bottom: -6px; width: 14px !important; height: 14px !important; cursor: nwse-resize; opacity: 1 !important; }
+    .cropper-point.point-e { top: 50%; right: -6px; margin-top: -6px; cursor: ew-resize; }
+    .cropper-point.point-n { top: -6px; left: 50%; margin-left: -6px; cursor: ns-resize; }
+    .cropper-point.point-w { top: 50%; left: -6px; margin-top: -6px; cursor: ew-resize; }
+    .cropper-point.point-s { bottom: -6px; left: 50%; margin-left: -6px; cursor: ns-resize; }
+    .cropper-point.point-ne { top: -6px; right: -6px; cursor: nesw-resize; }
+    .cropper-point.point-nw { top: -6px; left: -6px; cursor: nwse-resize; }
+    .cropper-point.point-sw { bottom: -6px; left: -6px; cursor: nesw-resize; }
+    .cropper-point.point-se { right: -7px; bottom: -7px; width: 16px !important; height: 16px !important; cursor: nwse-resize; opacity: 1 !important; }
+    
+    /* Critical hide classes to prevent double image display */
+    .cropper-hide {
+        display: block !important;
+        height: 0 !important;
+        position: absolute !important;
+        width: 0 !important;
+        overflow: hidden !important;
+        opacity: 0 !important;
+    }
+    .cropper-hidden {
+        display: none !important;
+    }
     .cropper-invisible { opacity: 0; }
     .cropper-bg { background-image: repeating-conic-gradient(#f1f5f9 0% 25%, #ffffff 0% 50%) !important; background-size: 16px 16px !important; }
     .cropper-auto-crop { cursor: crosshair; }
     .cropper-crop { cursor: crosshair; }
     .cropper-move { cursor: move; }
+
+    /* Mobile-optimized touch handles for easy resizing */
+    @media (max-width: 768px) {
+        .cropper-point {
+            width: 20px !important;
+            height: 20px !important;
+            border-radius: 4px !important;
+        }
+        .cropper-point.point-e { right: -10px; margin-top: -10px; }
+        .cropper-point.point-n { top: -10px; margin-left: -10px; }
+        .cropper-point.point-w { left: -10px; margin-top: -10px; }
+        .cropper-point.point-s { bottom: -10px; margin-left: -10px; }
+        .cropper-point.point-ne { top: -10px; right: -10px; }
+        .cropper-point.point-nw { top: -10px; left: -10px; }
+        .cropper-point.point-sw { bottom: -10px; left: -10px; }
+        .cropper-point.point-se {
+            right: -10px;
+            bottom: -10px;
+            width: 26px !important;
+            height: 26px !important;
+        }
+        .cropper-line.line-e { right: -8px; width: 16px; }
+        .cropper-line.line-n { top: -8px; height: 16px; }
+        .cropper-line.line-w { left: -8px; width: 16px; }
+        .cropper-line.line-s { bottom: -8px; height: 16px; }
+    }
 </style>
 @endpush
 
@@ -180,8 +220,8 @@
             </div>
 
             {{-- Canvas Box with Container --}}
-            <div class="bg-slate-900 rounded-2xl p-2 sm:p-4 border border-gray-200 shadow-inner overflow-hidden flex items-center justify-center min-h-[420px] max-h-[640px]">
-                <div id="cropper-image-container" class="w-full max-h-[600px] flex items-center justify-center">
+            <div class="bg-slate-900 rounded-2xl p-2 sm:p-4 border border-gray-200 shadow-inner overflow-hidden flex items-center justify-center min-h-[300px] sm:min-h-[420px] max-h-[620px]">
+                <div id="cropper-image-container" class="w-full max-h-[580px] flex items-center justify-center">
                     {{-- Dynamically populated with <img> upon file selection --}}
                 </div>
             </div>
@@ -402,8 +442,13 @@
 </style>
 
 @push('scripts')
-{{-- Local Cropper.js Script --}}
-<script src="{{ asset('js/cropper.min.js') }}"></script>
+{{-- Cropper.js Script (CDN with Local Fallback) --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.min.js" integrity="sha512-JyCZjCOZoyeQZSd5+WY48MS5G/jJZPBiNxd+evPPbQGCIcdpnLfPHWC72mlzqn3BAE0xnl65fqy9KEvmbgk3YA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+if (typeof Cropper === 'undefined') {
+    document.write('<script src="{{ asset('js/cropper.min.js') }}"><\/script>');
+}
+</script>
 
 <script>
 let cropper = null;
@@ -466,9 +511,9 @@ function loadFile(file) {
             cropper = null;
         }
 
-        // Re-inject a clean img element
+        // Re-inject a clean img element (without hardcoded inline display:block which interferes with .cropper-hide)
         const container = document.getElementById('cropper-image-container');
-        container.innerHTML = `<img id="cropper-image" src="${src}" alt="Workspace" style="display:block; max-width:100%; max-height:540px;" />`;
+        container.innerHTML = `<img id="cropper-image" src="${src}" alt="Workspace" style="max-width:100%; max-height:540px;" />`;
 
         const newImg = document.getElementById('cropper-image');
         scaleX = 1;
@@ -493,7 +538,7 @@ function loadFile(file) {
             cropper = new Cropper(newImg, {
                 viewMode: 1, // Constrain crop box within canvas
                 dragMode: 'crop',
-                aspectRatio: NaN, // Freeform initially
+                aspectRatio: NaN, // Freeform initially - user can freely expand & shrink
                 autoCrop: true, // Always show crop box initially
                 autoCropArea: 0.85,
                 responsive: true,
@@ -503,7 +548,11 @@ function loadFile(file) {
                 highlight: true,
                 cropBoxMovable: true, // Can drag box directly on image
                 cropBoxResizable: true, // Can resize box smaller/bigger with 8 handles
-                toggleDragModeOnDblclick: true,
+                toggleDragModeOnDblclick: false,
+                touchDragZoom: true,
+                zoomOnTouch: true,
+                minContainerWidth: 260,
+                minContainerHeight: 260,
                 ready() {
                     updateCropMetrics();
                 },
