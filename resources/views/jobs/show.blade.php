@@ -284,11 +284,70 @@
 
                 {{-- Social Share Bar --}}
                 <x-social-share :url="url()->current()" :title="$job->getTitle() . ' — ' . $job->company" />
+
+                {{-- WhatsApp 1-Click Viral Share Card --}}
+                <div class="mt-6 p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-emerald-500 via-teal-600 to-emerald-600 text-white shadow-md flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <div class="flex items-center gap-3.5 text-center sm:text-left">
+                        <div class="w-11 h-11 rounded-xl bg-white/20 backdrop-blur-xs text-white flex items-center justify-center text-2xl shrink-0">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-sm sm:text-base">
+                                {{ app()->getLocale() === 'bn' ? 'চাকরিপ্রার্থী বন্ধুকে হোয়াটসঅ্যাপে পাঠান' : 'Share Job with Friends on WhatsApp' }}
+                            </h4>
+                            <p class="text-xs text-emerald-100">
+                                {{ app()->getLocale() === 'bn' ? '১ ক্লিকেই বিজ্ঞপ্তির বিস্তারিত লিংক সহ বন্ধুদের গ্রুপে শেয়ার করুন।' : 'Send full job details and link directly to WhatsApp groups.' }}
+                            </p>
+                        </div>
+                    </div>
+                    @php
+                        $waText = (app()->getLocale() === 'bn' ? 'চাকরির বিজ্ঞপ্তি: ' : 'Job Circular: ') . $job->getTitle() . ' (' . $job->company . ')' . "\n" . (app()->getLocale() === 'bn' ? 'সার্কুলার ও আবেদনের লিংক: ' : 'Details: ') . url()->current();
+                    @endphp
+                    <a href="https://api.whatsapp.com/send?text={{ rawurlencode($waText) }}" target="_blank" rel="noopener noreferrer"
+                       class="w-full sm:w-auto px-5 py-2.5 bg-white text-emerald-700 hover:bg-emerald-50 rounded-xl text-xs sm:text-sm font-extrabold inline-flex items-center justify-center gap-2 shadow-sm transition-all hover:scale-105 shrink-0">
+                        <i class="fa-brands fa-whatsapp text-emerald-600 text-base"></i>
+                        <span>{{ app()->getLocale() === 'bn' ? 'হোয়াটসঅ্যাপে পাঠান' : 'Share on WhatsApp' }}</span>
+                    </a>
+                </div>
             </article>
         </div>
 
         {{-- Sidebar --}}
         <aside class="lg:col-span-4 mt-8 lg:mt-0 space-y-6">
+            {{-- Quick Job Application Toolkit (Loop traffic to tools) --}}
+            <div class="card p-5 bg-gradient-to-br from-blue-50/70 via-indigo-50/50 to-white border border-blue-100/90 rounded-2xl shadow-xs space-y-3">
+                <h3 class="font-extrabold text-gray-900 text-sm flex items-center gap-2">
+                    <i class="fa-solid fa-toolbox text-blue-600"></i>
+                    <span>{{ app()->getLocale() === 'bn' ? 'আবেদনের প্রয়োজনীয় টুলস' : 'Application Toolkit' }}</span>
+                </h3>
+                <div class="space-y-2">
+                    <a href="{{ route('tools.age-calculator', ['locale' => app()->getLocale()]) }}"
+                       class="p-2.5 bg-white hover:bg-blue-50 border border-gray-200/80 rounded-xl flex items-center justify-between text-xs font-semibold text-gray-800 transition-colors group">
+                        <span class="flex items-center gap-2">
+                            <i class="fa-solid fa-calculator text-blue-600"></i>
+                            <span>{{ app()->getLocale() === 'bn' ? 'বয়স হয়েছে কিনা যাচাই করুন' : 'Check Age Eligibility' }}</span>
+                        </span>
+                        <i class="fa-solid fa-chevron-right text-[10px] text-gray-400 group-hover:translate-x-0.5 transition-transform"></i>
+                    </a>
+                    <a href="{{ route('tools.cv-builder', ['locale' => app()->getLocale()]) }}"
+                       class="p-2.5 bg-white hover:bg-blue-50 border border-gray-200/80 rounded-xl flex items-center justify-between text-xs font-semibold text-gray-800 transition-colors group">
+                        <span class="flex items-center gap-2">
+                            <i class="fa-solid fa-file-invoice text-emerald-600"></i>
+                            <span>{{ app()->getLocale() === 'bn' ? 'ফ্রি ১-পেজের সিভি বানান' : 'Create Free CV' }}</span>
+                        </span>
+                        <i class="fa-solid fa-chevron-right text-[10px] text-gray-400 group-hover:translate-x-0.5 transition-transform"></i>
+                    </a>
+                    <a href="{{ route('tools.image-resizer', ['locale' => app()->getLocale()]) }}"
+                       class="p-2.5 bg-white hover:bg-blue-50 border border-gray-200/80 rounded-xl flex items-center justify-between text-xs font-semibold text-gray-800 transition-colors group">
+                        <span class="flex items-center gap-2">
+                            <i class="fa-solid fa-crop text-indigo-600"></i>
+                            <span>{{ app()->getLocale() === 'bn' ? 'ছবি ও স্বাক্ষর ৩০০×৩০০ রিসাইজ' : 'Resize Photo & Signature' }}</span>
+                        </span>
+                        <i class="fa-solid fa-chevron-right text-[10px] text-gray-400 group-hover:translate-x-0.5 transition-transform"></i>
+                    </a>
+                </div>
+            </div>
+
             {{-- Related Jobs --}}
             @if($relatedJobs->count() > 0)
                 <div class="card p-5">
