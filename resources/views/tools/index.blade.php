@@ -41,6 +41,9 @@
             'icon'  => 'fa-pen-nib',
             'color' => 'text-blue-600',
             'tools' => [
+                ['icon' => 'fa-language', 'bg' => 'bg-indigo-100', 'ic' => 'text-indigo-600',
+                 'label' => $isBn ? 'বিজয় ⇄ ইউনিকোড কনভার্টার' : 'Bijoy ⇄ Unicode Converter', 'route' => 'tools.bijoy-converter',
+                 'desc' => $isBn ? 'SutonnyMJ (বিজয়) ও ইউনিকোড (অভ্র) দ্রুত রূপান্তর' : 'Convert between Bijoy (ANSI) and Unicode instantly', 'badge' => 'New'],
                 ['icon' => 'fa-calculator', 'bg' => 'bg-blue-100', 'ic' => 'text-blue-600',
                  'label' => __('ui.word_counter'), 'route' => 'tools.word-counter',
                  'desc' => $isBn ? 'শব্দ, অক্ষর ও লাইন গণনা করুন' : 'Count words, characters & lines'],

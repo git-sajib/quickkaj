@@ -115,6 +115,11 @@ class ToolController extends Controller
         return view('tools.teletalk-sms');
     }
 
+    public function bijoyConverter(): View
+    {
+        return view('tools.bijoy-converter');
+    }
+
     public function generateQr(Request $request): Response|JsonResponse
     {
         $validated = $request->validate([
