@@ -110,6 +110,11 @@ class ToolController extends Controller
         return view('tools.pdf-tools');
     }
 
+    public function teletalkSms(): View
+    {
+        return view('tools.teletalk-sms');
+    }
+
     public function generateQr(Request $request): Response|JsonResponse
     {
         $validated = $request->validate([

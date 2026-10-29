@@ -64,6 +64,7 @@ Route::prefix('{locale}')
         Route::get('/tools/unit-converter', [ToolController::class, 'unitConverter'])->name('tools.unit-converter');
         Route::get('/tools/cv-builder', [ToolController::class, 'cvBuilder'])->name('tools.cv-builder');
         Route::get('/tools/pdf-tools', [ToolController::class, 'pdfTools'])->name('tools.pdf-tools');
+        Route::get('/tools/teletalk-sms', [ToolController::class, 'teletalkSms'])->name('tools.teletalk-sms');
 
         // Citizen Services & Examination Results Hub
         Route::get('/services', [CitizenServiceController::class, 'index'])->name('citizen.index');
@@ -104,6 +105,7 @@ Route::middleware('setlocale')->group(function () {
     Route::get('/tools/unit-converter', [ToolController::class, 'unitConverter']);
     Route::get('/tools/cv-builder', [ToolController::class, 'cvBuilder']);
     Route::get('/tools/pdf-tools', [ToolController::class, 'pdfTools']);
+    Route::get('/tools/teletalk-sms', [ToolController::class, 'teletalkSms']);
 });
 
 // QR code API endpoint (server-side generation)

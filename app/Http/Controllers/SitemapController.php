@@ -33,6 +33,7 @@ class SitemapController extends Controller
             'unit-converter',
             'cv-builder',
             'pdf-tools',
+            'teletalk-sms',
         ];
 
         $xml = view('sitemap', compact('jobs', 'articles', 'categories', 'tools'))->render();

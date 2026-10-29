@@ -3,10 +3,10 @@
     $isBn = app()->getLocale() === 'bn';
 @endphp
 
-@section('page_title', ($isBn ? 'ফ্রি অনলাইন টুলস ও ক্যালকুলেটর — ১৭টি প্রয়োজনীয় ডিজিটাল টুল' : 'Free Online Utility Tools & Calculators — 17 Digital Tools') . ' — ' . __('ui.site_name'))
+@section('page_title', ($isBn ? 'ফ্রি অনলাইন টুলস ও ক্যালকুলেটর — প্রয়োজনীয় ডিজিটাল টুলস' : 'Free Online Utility Tools & Calculators') . ' — ' . __('ui.site_name'))
 @section('seo_description', $isBn
-    ? 'সিভি মেকার, পিডিএফ মার্জ ও স্প্লিট, ছবি রিসাইজার ৩০০×৩০০, ব্যাকগ্রাউন্ড রিমুভার, বয়স ও সিজিপিএ ক্যালকুলেটর সহ ১৭টি দরকারি ফ্রি অনলাইন টুল।'
-    : 'Free online tools suite: CV maker, PDF merge/split, 300x300 photo resizer, background remover, word counter, and calculators. 100% free with client-side privacy.')
+    ? 'টেলিটক এসএমএস জেনারেটর, সরকারি চাকরির বয়স ক্যালকুলেটর, সিভি মেকার, ছবি ও স্বাক্ষর রিসাইজার ৩০০×৩০০, পিডিএফ মার্জ সহ দরকারি ফ্রি অনলাইন টুলস।'
+    : 'Free online tools suite: Teletalk SMS generator, Govt age calculator, CV maker, PDF merge/split, 300x300 photo resizer, and more.')
 
 @section('structured_data')
 <script type="application/ld+json">
@@ -14,7 +14,7 @@
     "@@context": "https://schema.org",
     "@@type": "CollectionPage",
     "name": "{{ $isBn ? 'ফ্রি অনলাইন টুলস ও ক্যালকুলেটর' : 'Free Online Utility Tools & Calculators' }}",
-    "description": "{{ $isBn ? 'সিভি মেকার, পিডিএফ টুলস, ছবি রিসাইজার, ব্যাকগ্রাউন্ড রিমুভার, বয়স ও সিজিপিএ ক্যালকুলেটর সহ ১৭টি দরকারি ফ্রি অনলাইন টুল।' : 'Suite of 17 free privacy-focused online tools for documents, images, text, and calculators.' }}",
+    "description": "{{ $isBn ? 'টেলিটক এসএমএস জেনারেটর, সরকারি চাকরির বয়স ক্যালকুলেটর, সিভি মেকার, ছবি ও স্বাক্ষর রিসাইজার ৩০০×৩০০ সহ দরকারি ফ্রি অনলাইন টুল।' : 'Suite of free privacy-focused online tools for documents, images, text, and calculators.' }}",
     "url": "{{ url()->current() }}",
     "inLanguage": "{{ $isBn ? 'bn-BD' : 'en-US' }}",
     "isPartOf": {
@@ -80,8 +80,8 @@
             'color' => 'text-orange-600',
             'tools' => [
                 ['icon' => 'fa-cake-candles', 'bg' => 'bg-blue-100', 'ic' => 'text-blue-600',
-                 'label' => $isBn ? 'বয়স ক্যালকুলেটর' : 'Age Calculator', 'route' => 'tools.age-calculator',
-                 'desc' => $isBn ? 'সঠিক বয়স বছর, মাস, দিনে জানুন' : 'Calculate exact age in years, months, days'],
+                 'label' => $isBn ? 'বয়স ও চাকরি ক্যালকুলেটর' : 'Age & Govt Job Calculator', 'route' => 'tools.age-calculator',
+                 'desc' => $isBn ? 'সঠিক বয়স ও সরকারি চাকরির ৩২ বছর কোটা যোগ্যতা' : 'Calculate exact age & 32-year job quota eligibility', 'badge' => 'Updated'],
                 ['icon' => 'fa-weight-scale', 'bg' => 'bg-emerald-100', 'ic' => 'text-emerald-600',
                  'label' => $isBn ? 'BMI ক্যালকুলেটর' : 'BMI Calculator', 'route' => 'tools.bmi-calculator',
                  'desc' => $isBn ? 'বডি মাস ইন্ডেক্স হিসাব করুন' : 'Calculate your Body Mass Index'],
@@ -125,7 +125,10 @@
             'tools' => [
                 ['icon' => 'fa-file-lines', 'bg' => 'bg-blue-100', 'ic' => 'text-blue-600',
                  'label' => $isBn ? 'ফ্রি CV বিল্ডার' : 'Free CV Builder', 'route' => 'tools.cv-builder',
-                 'desc' => $isBn ? '৩টি টেমপ্লেট — PDF হিসেবে ডাউনলোড' : '3 templates — download as PDF', 'badge' => 'New'],
+                 'desc' => $isBn ? '৩টি টেমপ্লেট — PDF হিসেবে ডাউনলোড' : '3 templates — download as PDF', 'badge' => 'Popular'],
+                ['icon' => 'fa-comment-sms', 'bg' => 'bg-emerald-100', 'ic' => 'text-emerald-600',
+                 'label' => $isBn ? 'টেলিটক SMS ফরম্যাট জেনারেটর' : 'Teletalk SMS Generator', 'route' => 'tools.teletalk-sms',
+                 'desc' => $isBn ? '১৬২২২ ফি এসএমএস ও ইউজার আইডি/পিন রিকভারি' : 'Generate 16222 job fee & recovery SMS', 'badge' => 'New'],
                 ['icon' => 'fa-qrcode', 'bg' => 'bg-rose-100', 'ic' => 'text-rose-600',
                  'label' => __('ui.qr_generator'), 'route' => 'tools.qr-generator',
                  'desc' => $isBn ? 'যেকোনো URL থেকে QR কোড তৈরি' : 'Generate QR codes from any URL or text'],

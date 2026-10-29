@@ -345,6 +345,14 @@
                         </span>
                         <i class="fa-solid fa-chevron-right text-[10px] text-gray-400 group-hover:translate-x-0.5 transition-transform"></i>
                     </a>
+                    <a href="{{ route('tools.teletalk-sms', ['locale' => app()->getLocale()]) }}"
+                       class="p-2.5 bg-white hover:bg-emerald-50 border border-gray-200/80 rounded-xl flex items-center justify-between text-xs font-semibold text-gray-800 transition-colors group">
+                        <span class="flex items-center gap-2">
+                            <i class="fa-solid fa-comment-sms text-emerald-600"></i>
+                            <span>{{ app()->getLocale() === 'bn' ? 'টেলিটক ১৬২২২ ফি SMS তৈরি' : 'Teletalk 16222 SMS Tool' }}</span>
+                        </span>
+                        <i class="fa-solid fa-chevron-right text-[10px] text-gray-400 group-hover:translate-x-0.5 transition-transform"></i>
+                    </a>
                 </div>
             </div>
 
