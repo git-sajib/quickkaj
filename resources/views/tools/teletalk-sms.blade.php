@@ -12,7 +12,7 @@
 @section('structured_data')
 <script type="application/ld+json">
 {
-    "@context": "https://schema.org",
+    "@@context": "https://schema.org",
     "@type": "WebApplication",
     "name": "{{ $isBn ? 'টেলিটক জব এসএমএস জেনারেটর' : 'Teletalk Job SMS Generator' }}",
     "description": "{{ $isBn ? 'সরকারি চাকরির আবেদনের ১ম ও ২য় এসএমএস তৈরির টুল।' : 'Generate Teletalk 16222 job application SMS formats.' }}",
@@ -29,7 +29,7 @@
 </script>
 <script type="application/ld+json">
 {
-    "@context": "https://schema.org",
+    "@@context": "https://schema.org",
     "@type": "FAQPage",
     "mainEntity": [
         {

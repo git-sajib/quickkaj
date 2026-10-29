@@ -12,7 +12,7 @@
 @section('structured_data')
 <script type="application/ld+json">
 {
-    "@context": "https://schema.org",
+    "@@context": "https://schema.org",
     "@type": "WebApplication",
     "name": "{{ $isBn ? 'সরকারি চাকরির বয়স ক্যালকুলেটর' : 'Govt Job Age Calculator BD' }}",
     "description": "{{ $isBn ? 'চাকরির নির্দিষ্ট তারিখে বয়স ও আবেদন যোগ্যতা যাচাইয়ের টুল।' : 'Calculate exact age and check BD govt job application eligibility.' }}",
@@ -29,7 +29,7 @@
 </script>
 <script type="application/ld+json">
 {
-    "@context": "https://schema.org",
+    "@@context": "https://schema.org",
     "@type": "FAQPage",
     "mainEntity": [
         {
