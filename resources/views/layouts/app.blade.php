@@ -188,6 +188,9 @@
     });
     </script>
 
+    {{-- Back to Top Button --}}
+    @include('components.back-to-top')
+
     @stack('scripts')
 </body>
 </html>
